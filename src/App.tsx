@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { SearchBar } from "./components/Search.Bar";
+import { SearchBar } from './components/Search.Bar'
 
 function App() {
   return (
-    <main className="flex flex-col h-screen bg-zinc-800 text-slate-100 p-4 items-center justify-center">
+    <main className="flex flex-col h-screen bg-zinc-900 text-zinc-200 p-4 items-center">
       <SearchBar />
     </main>
-  );
+  )
 }
 
-export default App;
+export default App
