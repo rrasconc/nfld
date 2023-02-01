@@ -1,19 +1,32 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
+import { Player, SearchBarProps } from '../constants/types'
 import { useSearchbar } from '../hooks/useSearchbar'
+import { Loader } from './Loader.Spinner'
 
-export function SearchBar() {
+export function SearchBar({ onPlayerSubmit }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('')
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
   const searchbar = useSearchbar(searchValue)
   const { list, isLoading } = searchbar
 
   const [isListVisible, setIsListVisible] = useState<boolean>(false)
 
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    if (selectedPlayer === null) {
+      return
+    }
+    onPlayerSubmit(selectedPlayer)
+    setSearchValue('')
+    setSelectedPlayer(null)
+  }
+
   return (
     <>
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit}
         className="flex flex-row rounded-lg w-full my-4 pl-4 max-w-5xl bg-zinc-900 border focus-within:border-zinc-400 border-zinc-600 items-center"
       >
         <FontAwesomeIcon
@@ -42,31 +55,34 @@ export function SearchBar() {
         </button>
       </form>
 
-      {isLoading && <h1>loading</h1>}
-
       {isListVisible && searchValue && (
         <div className="flex max-h-72 flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800">
-          {list.length === 0 && (
+          {isLoading && <Loader />}
+
+          {!isLoading && list.length === 0 && (
             <span className="p-4 text-zinc-600 text-center">No results</span>
           )}
-          {list.map((item, index) => {
-            const isFirst = index === 0
-            return (
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchValue(`${item.first_name} ${item.last_name}`)
-                  setIsListVisible(false)
-                }}
-                key={index}
-                className={`p-4 hover:bg-zinc-900 text-left ${
-                  !isFirst && 'border-t border-zinc-600 pt-4'
-                }`}
-              >
-                {item.first_name} {item.last_name}
-              </button>
-            )
-          })}
+
+          {!isLoading &&
+            list.map((player, index) => {
+              const isFirst = index === 0
+              return (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchValue(`${player.first_name} ${player.last_name}`)
+                    setSelectedPlayer(player)
+                    setIsListVisible(false)
+                  }}
+                  key={index}
+                  className={`p-4 hover:bg-zinc-900 text-left ${
+                    !isFirst && 'border-t border-zinc-600 pt-4'
+                  }`}
+                >
+                  {player.first_name} {player.last_name}
+                </button>
+              )
+            })}
         </div>
       )}
     </>

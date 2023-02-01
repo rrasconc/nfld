@@ -1,12 +1,12 @@
 import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
 
-const CATEGORIES = [
+export const CATEGORIES = [
   'Conf.',
   'Division',
   'Team',
+  'Type',
   'Position',
   'Drafted'
-  // 'College'
 ]
 
 export function AnswerCard({ value, isCorrect }: AnswerCardProps) {
@@ -14,34 +14,54 @@ export function AnswerCard({ value, isCorrect }: AnswerCardProps) {
     <span
       className={`flex ${
         isCorrect ? 'bg-green-600' : 'bg-red-600'
-      }  h-16 w-16 p-1 rounded-md border items-center justify-center border-zinc-400`}
+      }  h-16 w-16 p-1 rounded-sm border items-center justify-center border-zinc-400`}
     >
       {value}
     </span>
   )
 }
 
-export function AnswersBoard({ answersList }: AnswersBoardProps) {
+export function AnswersBoard({ answersList, winnerPlayer }: AnswersBoardProps) {
   return (
     <div className="w-full overflow-y-hidden overflow-x-scroll md:overflow-x-hidden sm:flex sm:flex-col sm:items-center py-4">
-      <div className="flex min-w-max flex-row md:justify-center font-bold text-xs gap-3">
-        {CATEGORIES.map((item) => (
-          <span className="w-16 border-b border-zinc-600 py-2 flex justify-center">
+      <div className="flex min-w-max flex-row md:justify-center font-bold text-xs gap-2">
+        {CATEGORIES.map((item, index) => (
+          <span
+            key={index}
+            className="w-16 border-b border-zinc-600 py-2 flex justify-center"
+          >
             {item}
           </span>
         ))}
       </div>
-      {answersList.map((item) => (
-        <div className="flex min-w-max flex-row gap-3 my-3">
-          <AnswerCard isCorrect={true} value={item.conference} />
-          <AnswerCard isCorrect={true} value={item.division} />
-          <AnswerCard isCorrect={true} value={item.team} />
-          <AnswerCard isCorrect={true} value={item.position} />
+      {answersList.map((player, index) => (
+        <div key={index} className="flex min-w-max flex-row gap-2 mt-2">
+          <AnswerCard
+            isCorrect={player.conference === winnerPlayer.conference}
+            value={player.conference}
+          />
+          <AnswerCard
+            isCorrect={player.division === winnerPlayer.division}
+            value={player.division}
+          />
+          <AnswerCard
+            isCorrect={player.team === winnerPlayer.team}
+            value={player.team}
+          />
+          <AnswerCard
+            isCorrect={player.position_type === winnerPlayer.position_type}
+            value={player.position_type}
+          />
+          <AnswerCard
+            isCorrect={player.position === winnerPlayer.position}
+            value={player.position}
+          />
+          <AnswerCard
+            isCorrect={player.drafted === winnerPlayer.drafted}
+            value={player.drafted.toString()}
+          />
         </div>
       ))}
-      {/* <span className="flex bg-green-600 h-16 w-16 rounded-md border items-center text-center justify-center border-zinc-400">
-          Michigan west
-        </span> */}
     </div>
   )
 }
