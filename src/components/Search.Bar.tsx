@@ -4,8 +4,9 @@ import { FormEvent, useState } from 'react'
 import { Player, SearchBarProps } from '../constants/types'
 import { useSearchbar } from '../hooks/useSearchbar'
 import { Loader } from './Loader.Spinner'
+import { motion } from 'framer-motion'
 
-export function SearchBar({ onPlayerSubmit }: SearchBarProps) {
+export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('')
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
   const searchbar = useSearchbar(searchValue)
@@ -15,6 +16,7 @@ export function SearchBar({ onPlayerSubmit }: SearchBarProps) {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
+
     if (selectedPlayer === null) {
       return
     }
@@ -25,7 +27,12 @@ export function SearchBar({ onPlayerSubmit }: SearchBarProps) {
 
   return (
     <>
-      <form
+      <motion.form
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          delay: 0.2
+        }}
         onSubmit={handleSubmit}
         className="flex flex-row rounded-lg w-full my-4 pl-4 max-w-5xl bg-zinc-900 border focus-within:border-zinc-400 border-zinc-600 items-center"
       >
@@ -53,9 +60,9 @@ export function SearchBar({ onPlayerSubmit }: SearchBarProps) {
         >
           Guess
         </button>
-      </form>
+      </motion.form>
 
-      {isListVisible && searchValue && (
+      {isListVisible && searchValue && !disabled && (
         <div className="flex max-h-72 flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800">
           {isLoading && <Loader />}
 

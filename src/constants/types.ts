@@ -1,3 +1,5 @@
+import { AnimationControls } from 'framer-motion'
+
 export interface Player {
   id: number
   first_name: string
@@ -13,13 +15,16 @@ export interface Player {
 export interface AnswerCardProps {
   value: string
   isCorrect: boolean
+  delay: number
 }
 
 export interface AnswersBoardProps {
   answersList: Player[]
   winnerPlayer: Player
+  animationControls: AnimationControls
 }
 
 export interface SearchBarProps {
   onPlayerSubmit: (player: Player) => void
+  disabled: boolean
 }
