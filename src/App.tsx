@@ -6,7 +6,7 @@ function App() {
     <main className="flex flex-col bg-[url('/nfl.jpg')] bg-cover bg-blend-multiply h-screen bg-zinc-900 text-zinc-200 p-4 items-center">
       <img src="./nfld.png" className="h-48 w-48 my-4" />
       <SearchBar />
-      <AnswersBoard />
+      <AnswersBoard answersList={[]} />
 
       {/* <div className="grid grid-cols-6 gap-4 text-center">
         <span className="text-xs border-b border-zinc-600 py-2">
