@@ -4,7 +4,7 @@ import { TimeLeft } from '../constants/types'
 
 export function CountDownTimer() {
   const [countdown, setCountdown] = useState<TimeLeft>({
-    hours: 0,
+    hours: 24,
     minutes: 0,
     seconds: 0
   })

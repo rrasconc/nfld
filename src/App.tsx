@@ -9,6 +9,8 @@ import { motion } from 'framer-motion'
 import { CountDownTimer } from './components/Count.Down.Timer'
 import { useGame } from './hooks/useGame'
 
+import { ClipboardButton } from './components/Clipboard.Button'
+
 function App() {
   const dailyPlayer = useDailyPlayer()
   const game = useGame(dailyPlayer)
@@ -45,15 +47,10 @@ function App() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
           className="flex flex-col items-center"
         >
-          <button
-            type="button"
-            onClick={(event) => {}}
-            className="p-4 mt-4 mb-2 border border-sky-900 rounded-md bg-sky-800 hover:border-zinc-400 focus:border-zinc-400"
-          >
-            Share
-          </button>
+          <ClipboardButton answersList={answers} />
           <CountDownTimer />
         </motion.div>
       )}
