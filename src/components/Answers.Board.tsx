@@ -2,12 +2,12 @@ import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
 import { motion } from 'framer-motion'
 
 export const CATEGORIES = [
-  'Conf.',
-  'Division',
-  'Team',
-  'Type',
-  'Position',
-  'Drafted'
+  { label: 'Conf.', key: 'conference' },
+  { label: 'Division', key: 'division' },
+  { label: 'Team', key: 'team' },
+  { label: 'Type', key: 'position_type' },
+  { label: 'Position', key: 'position' },
+  { label: 'Drafted', key: 'drafted' }
 ]
 
 export function AnswerCard({ value, isCorrect, delay }: AnswerCardProps) {
@@ -37,12 +37,12 @@ export function AnswersBoard({
         animate={{ opacity: 1 }}
         className="flex min-w-max flex-row md:justify-center font-bold text-xs gap-2"
       >
-        {CATEGORIES.map((item, index) => (
+        {CATEGORIES.map((category, index) => (
           <span
             key={index}
             className="w-16 border-b border-zinc-600 py-2 flex justify-center"
           >
-            {item}
+            {category.label}
           </span>
         ))}
       </motion.div>

@@ -50,7 +50,10 @@ function App() {
           transition={{ delay: 1 }}
           className="flex flex-col items-center"
         >
-          <ClipboardButton answersList={answers} />
+          <ClipboardButton
+            answersList={answers}
+            winnerPlayer={dailyPlayer.data}
+          />
           <CountDownTimer />
         </motion.div>
       )}

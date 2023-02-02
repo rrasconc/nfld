@@ -9,10 +9,10 @@ import { motion } from 'framer-motion'
 export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('')
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
+  const [isListVisible, setIsListVisible] = useState<boolean>(false)
+
   const searchbar = useSearchbar(searchValue)
   const { list, isLoading } = searchbar
-
-  const [isListVisible, setIsListVisible] = useState<boolean>(false)
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
