@@ -28,3 +28,14 @@ export interface SearchBarProps {
   onPlayerSubmit: (player: Player) => void
   disabled: boolean
 }
+
+export interface GameStatus {
+  isWinner: boolean
+  answersList: Player[]
+}
+
+export interface TimeLeft {
+  hours: number
+  minutes: number
+  seconds: number
+}

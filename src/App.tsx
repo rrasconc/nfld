@@ -1,43 +1,26 @@
-import { useState } from 'react'
 import { AnswersBoard, CATEGORIES } from './components/Answers.Board'
 
 import { SearchBar } from './components/Search.Bar'
 import { Splash } from './components/Splash'
-import { Player } from './constants/types'
+
 import { useDailyPlayer } from './hooks/useDailyPlayer'
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion'
+
+import { CountDownTimer } from './components/Count.Down.Timer'
+import { useGame } from './hooks/useGame'
 
 function App() {
   const dailyPlayer = useDailyPlayer()
-  const animationControls = useAnimationControls()
+  const game = useGame(dailyPlayer)
+  const {
+    isWinner,
+    isLoadingGameStatus,
+    handlePlayerSubmit,
+    answers,
+    animationControls
+  } = game
 
-  const [answers, setAnswers] = useState<Player[]>([])
-  const [isWinner, setIsWinner] = useState(false)
-
-  const handlePlayerSubmit = (player: Player) => {
-    if (answers.length >= CATEGORIES.length) {
-      return
-    }
-    setAnswers([...answers, player])
-
-    if (JSON.stringify(player) !== JSON.stringify(dailyPlayer.data)) {
-      return
-    }
-
-    setTimeout(async () => {
-      setIsWinner(true)
-      await animationControls.start({
-        scale: 1.2,
-        transition: { duration: 0.2 }
-      })
-      await animationControls.start({
-        scale: 1,
-        transition: { duration: 0.2 }
-      })
-    }, 2800)
-  }
-
-  if (dailyPlayer.isLoading) {
+  if (dailyPlayer.isLoading || isLoadingGameStatus) {
     return <Splash />
   }
 
@@ -47,9 +30,10 @@ function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         src="./logo.png"
-        className="h-48 w-48 my-4"
+        className="h-32 w-32 my-4"
       />
       <SearchBar onPlayerSubmit={handlePlayerSubmit} disabled={isWinner} />
+
       {dailyPlayer.data && answers.length > 0 && (
         <AnswersBoard
           answersList={answers}
@@ -57,6 +41,7 @@ function App() {
           animationControls={animationControls}
         />
       )}
+      {isWinner || (answers.length === CATEGORIES.length && <CountDownTimer />)}
     </main>
   )
 }
