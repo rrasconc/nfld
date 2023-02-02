@@ -1,4 +1,4 @@
-import { AnswersBoard, CATEGORIES } from './components/Answers.Board'
+import { AnswersBoard } from './components/Answers.Board'
 
 import { SearchBar } from './components/Search.Bar'
 import { Splash } from './components/Splash'
@@ -10,6 +10,7 @@ import { CountDownTimer } from './components/Count.Down.Timer'
 import { useGame } from './hooks/useGame'
 
 import { ClipboardButton } from './components/Clipboard.Button'
+import { CATEGORIES } from './constants/game'
 
 function App() {
   const dailyPlayer = useDailyPlayer()

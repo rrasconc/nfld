@@ -1,14 +1,6 @@
-import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
 import { motion } from 'framer-motion'
-
-export const CATEGORIES = [
-  { label: 'Conf.', key: 'conference' },
-  { label: 'Division', key: 'division' },
-  { label: 'Team', key: 'team' },
-  { label: 'Type', key: 'position_type' },
-  { label: 'Position', key: 'position' },
-  { label: 'Drafted', key: 'drafted' }
-]
+import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
+import { CATEGORIES } from '../constants/game'
 
 export function AnswerCard({ value, isCorrect, delay }: AnswerCardProps) {
   return (

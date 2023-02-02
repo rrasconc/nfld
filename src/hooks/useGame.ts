@@ -1,11 +1,16 @@
+import moment from 'moment'
 import { useEffect, useState } from 'react'
-import { Player } from '../constants/types'
-import { getGameStatus, storeGameStatus } from '../constants/localStorage'
-import { CATEGORIES } from '../components/Answers.Board'
+import { DailyPlayer, Player } from '../constants/types'
+import {
+  getGameStatus,
+  resetGameStatus,
+  storeGameStatus
+} from '../constants/localStorage'
 import { useAnimationControls } from 'framer-motion'
+import { CATEGORIES, RESET_HOUR } from '../constants/game'
 
 export function useGame(dailyPlayer: {
-  data: Player | null
+  data: DailyPlayer | null
   isLoading: boolean
 }) {
   const animationControls = useAnimationControls()
@@ -56,6 +61,22 @@ export function useGame(dailyPlayer: {
 
     setIsLoadingGameStatus(false)
   }
+
+  const checkForReset = () => {
+    const dailyDate = moment(dailyPlayer.data?.daily_date)
+      .set('hours', RESET_HOUR)
+      .subtract(1, 'day')
+
+    const hoursDiff = moment().diff(dailyDate, 'hours')
+
+    if (hoursDiff >= 24) {
+      resetGameStatus()
+    }
+  }
+
+  useEffect(() => {
+    checkForReset()
+  }, [])
 
   useEffect(() => {
     retrieveGameStatus()

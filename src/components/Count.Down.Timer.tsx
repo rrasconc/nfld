@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { useEffect, useState } from 'react'
+import { RESET_HOUR } from '../constants/game'
 import { TimeLeft } from '../constants/types'
 
 export function CountDownTimer() {
@@ -9,9 +10,16 @@ export function CountDownTimer() {
     seconds: 0
   })
 
+  const refreshPage = () => {
+    window.location.reload()
+  }
+
   const getTimeLeft = () => {
     const now = moment()
-    const nextDaily = moment().add(1, 'days').set('hour', 8).set('minute', 0)
+    const nextDaily = moment()
+      .add(1, 'days')
+      .set('hour', RESET_HOUR)
+      .set('minute', 0)
 
     const secondsLeft = nextDaily.diff(now, 'seconds') - now.seconds()
 
@@ -25,6 +33,11 @@ export function CountDownTimer() {
   useEffect(() => {
     const countDownInterval = setInterval(() => {
       const timeLeft = getTimeLeft()
+
+      const { hours, minutes, seconds } = timeLeft
+      if (hours === 0 && minutes === 0 && seconds === 0) {
+        refreshPage()
+      }
       setCountdown(timeLeft)
     }, 1000)
 

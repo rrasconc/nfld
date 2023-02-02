@@ -2,8 +2,6 @@ import { GameStatus } from './types'
 
 const gameStatusKey = '@gameStatus'
 export const storeGameStatus = (gameStatus: GameStatus) => {
-  console.log(gameStatus)
-
   try {
     localStorage.setItem(gameStatusKey, JSON.stringify(gameStatus))
   } catch (error) {
@@ -18,6 +16,14 @@ export const getGameStatus = () => {
       return JSON.parse(gameStatus)
     }
     return null
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const resetGameStatus = () => {
+  try {
+    localStorage.removeItem(gameStatusKey)
   } catch (error) {
     console.error(error)
   }

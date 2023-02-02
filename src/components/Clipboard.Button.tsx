@@ -1,20 +1,20 @@
 import { faCheck, faPaste } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-import { Player } from '../constants/types'
-
-import { CATEGORIES } from './Answers.Board'
+import { CATEGORIES } from '../constants/game'
+import { ClipBoardButtonProps, Player } from '../constants/types'
 
 export function ClipboardButton({
   answersList,
   winnerPlayer
-}: {
-  answersList: Player[]
-  winnerPlayer: Player
-}) {
+}: ClipBoardButtonProps) {
   const [isCopied, setIsCopied] = useState<boolean>(false)
 
   const getResultsEmojis = () => {
+    if (winnerPlayer == null) {
+      return
+    }
+
     const resultsEmojis = answersList.map((answer) => {
       let answerEmojis = ''
       CATEGORIES.forEach((category) => {

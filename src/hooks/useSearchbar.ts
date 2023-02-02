@@ -25,6 +25,7 @@ export function useSearchbar(searchValue: string) {
     setPlayers({ ...players, isLoading: true })
     try {
       const res = await backend.get('players/')
+
       setPlayers({ ...players, list: [...res.data], isLoading: false })
     } catch (error) {
       console.error(error)

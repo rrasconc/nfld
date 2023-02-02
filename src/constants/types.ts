@@ -12,6 +12,10 @@ export interface Player {
   drafted: number
 }
 
+export interface DailyPlayer extends Player {
+  daily_date: string
+}
+
 export interface AnswerCardProps {
   value: string
   isCorrect: boolean
@@ -38,4 +42,9 @@ export interface TimeLeft {
   hours: number
   minutes: number
   seconds: number
+}
+
+export interface ClipBoardButtonProps {
+  answersList: Player[]
+  winnerPlayer: Player | null
 }

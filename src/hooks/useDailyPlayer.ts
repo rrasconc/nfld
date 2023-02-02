@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { backend } from '../constants/backend'
-import { Player } from '../constants/types'
+import { DailyPlayer } from '../constants/types'
 
 export function useDailyPlayer() {
-  const [data, setData] = useState<Player | null>(null)
+  const [data, setData] = useState<DailyPlayer | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchDailyPlayer = async () => {
