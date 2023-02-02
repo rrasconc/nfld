@@ -1,10 +1,13 @@
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { TimeLeft } from '../constants/types'
-import { AnimatePresence, motion } from 'framer-motion'
 
 export function CountDownTimer() {
-  const [countdown, setCountdown] = useState<TimeLeft>()
+  const [countdown, setCountdown] = useState<TimeLeft>({
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  })
 
   const getTimeLeft = () => {
     const now = moment()
@@ -34,11 +37,7 @@ export function CountDownTimer() {
     return null
   }
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="flex flex-col items-center my-4"
-    >
+    <div className="flex flex-col items-center mt-2 mb-4">
       <h1 className="text-lg text-zinc-500">Next player in</h1>
 
       <span className="text-2xl">
@@ -47,6 +46,6 @@ export function CountDownTimer() {
         {countdown.minutes}:{countdown.seconds < 10 && '0'}
         {countdown.seconds}
       </span>
-    </motion.div>
+    </div>
   )
 }

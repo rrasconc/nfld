@@ -41,7 +41,22 @@ function App() {
           animationControls={animationControls}
         />
       )}
-      {isWinner || (answers.length === CATEGORIES.length && <CountDownTimer />)}
+      {(isWinner || answers.length === CATEGORIES.length) && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex flex-col items-center"
+        >
+          <button
+            type="button"
+            onClick={(event) => {}}
+            className="p-4 mt-4 mb-2 border border-sky-900 rounded-md bg-sky-800 hover:border-zinc-400 focus:border-zinc-400"
+          >
+            Share
+          </button>
+          <CountDownTimer />
+        </motion.div>
+      )}
     </main>
   )
 }

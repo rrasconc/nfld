@@ -56,7 +56,7 @@ export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
         />
         <button
           type="submit"
-          className="bg-sky-800 focus:border-zinc-400 focus:border-l focus:bg-sky-800 px-6 py-4 rounded-r-lg h-full"
+          className="bg-sky-800 hover:border-zinc-400 hover:border-l focus:border-zinc-400 focus:border-l focus:bg-sky-800 px-6 py-4 rounded-r-lg h-full"
         >
           Guess
         </button>
