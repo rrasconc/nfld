@@ -39,7 +39,9 @@ export function AnswersBoard({
         ))}
       </motion.div>
       {answersList.map((player, index) => {
-        const isWinner = JSON.stringify(player) === JSON.stringify(winnerPlayer)
+        const isWinner =
+          JSON.stringify({ ...player, daily_date: winnerPlayer.daily_date }) ===
+          JSON.stringify(winnerPlayer)
         return (
           <motion.div
             key={index}

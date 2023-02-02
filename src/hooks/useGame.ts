@@ -31,7 +31,12 @@ export function useGame(dailyPlayer: {
 
     setAnswers([...answers, player])
 
-    if (JSON.stringify(player) !== JSON.stringify(dailyPlayer.data)) {
+    if (
+      JSON.stringify({
+        ...player,
+        daily_date: dailyPlayer.data?.daily_date
+      }) !== JSON.stringify(dailyPlayer.data)
+    ) {
       storeGameStatus(currentGameStatus)
       return
     }
@@ -43,6 +48,7 @@ export function useGame(dailyPlayer: {
         scale: 1.2,
         transition: { duration: 0.2 }
       })
+
       await animationControls.start({
         scale: 1,
         transition: { duration: 0.2 }
@@ -63,9 +69,11 @@ export function useGame(dailyPlayer: {
   }
 
   const checkForReset = () => {
-    const dailyDate = moment(dailyPlayer.data?.daily_date)
-      .set('hours', RESET_HOUR)
-      .subtract(1, 'day')
+    const dailyDate = moment(dailyPlayer.data?.daily_date).set(
+      'hours',
+      RESET_HOUR
+    )
+    // .subtract(1, 'day') //for debug only
 
     const hoursDiff = moment().diff(dailyDate, 'hours')
 

@@ -1,4 +1,4 @@
-export const RESET_HOUR = 14
+export const RESET_HOUR = 15
 
 export const CATEGORIES = [
   { label: 'Conf.', key: 'conference' },

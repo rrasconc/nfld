@@ -24,7 +24,7 @@ export interface AnswerCardProps {
 
 export interface AnswersBoardProps {
   answersList: Player[]
-  winnerPlayer: Player
+  winnerPlayer: DailyPlayer
   animationControls: AnimationControls
 }
 
