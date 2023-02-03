@@ -4,7 +4,7 @@ import { SearchBar } from './components/Search.Bar'
 import { Splash } from './components/Splash'
 
 import { useDailyPlayer } from './hooks/useDailyPlayer'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { CountDownTimer } from './components/Count.Down.Timer'
 import { useGame } from './hooks/useGame'
@@ -20,7 +20,8 @@ function App() {
     isLoadingGameStatus,
     handlePlayerSubmit,
     answers,
-    animationControls
+    animationControls,
+    latestAnswer
   } = game
 
   if (dailyPlayer.isLoading || isLoadingGameStatus) {
@@ -45,6 +46,19 @@ function App() {
             animationControls={animationControls}
           />
         )}
+
+        <AnimatePresence>
+          <motion.span
+            key={latestAnswer.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="my-4 text-zinc-400"
+          >
+            {latestAnswer.first_name} {latestAnswer.last_name}
+          </motion.span>
+        </AnimatePresence>
+
         {(isWinner || answers.length === CATEGORIES.length) && (
           <motion.div
             initial={{ opacity: 0 }}

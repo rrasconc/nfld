@@ -14,6 +14,7 @@ export interface Player {
 
 export interface DailyPlayer extends Player {
   daily_date: string
+  daily_number: number
 }
 
 export interface AnswerCardProps {
@@ -46,5 +47,5 @@ export interface TimeLeft {
 
 export interface ClipBoardButtonProps {
   answersList: Player[]
-  winnerPlayer: Player | null
+  winnerPlayer: DailyPlayer | null
 }

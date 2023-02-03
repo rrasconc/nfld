@@ -19,6 +19,8 @@ export function useGame(dailyPlayer: {
   const [isWinner, setIsWinner] = useState(false)
   const [isLoadingGameStatus, setIsLoadingGameStatus] = useState(true)
 
+  const latestAnswer = answers[answers.length - 1]
+
   const handlePlayerSubmit = async (player: Player) => {
     if (answers.length >= CATEGORIES.length) {
       return
@@ -34,7 +36,8 @@ export function useGame(dailyPlayer: {
     if (
       JSON.stringify({
         ...player,
-        daily_date: dailyPlayer.data?.daily_date
+        daily_date: dailyPlayer.data?.daily_date,
+        daily_number: dailyPlayer.data?.daily_number
       }) !== JSON.stringify(dailyPlayer.data)
     ) {
       storeGameStatus(currentGameStatus)
@@ -95,6 +98,7 @@ export function useGame(dailyPlayer: {
     isLoadingGameStatus,
     handlePlayerSubmit,
     animationControls,
-    answers
+    answers,
+    latestAnswer
   }
 }
