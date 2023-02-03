@@ -1,6 +1,6 @@
 export function Splash() {
   return (
-    <main className="flex h-screen bg-[url('/nfl.jpg')] bg-cover bg-blend-multiply bg-zinc-800 items-center justify-center">
+    <main className="flex h-screen bg-[url('/bg.png')] bg-cover items-center justify-center">
       <div role="status">
         <svg
           aria-hidden="true"
