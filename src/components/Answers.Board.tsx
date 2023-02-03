@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
 import { CATEGORIES } from '../constants/game'
 
@@ -22,6 +22,8 @@ export function AnswersBoard({
   winnerPlayer,
   animationControls
 }: AnswersBoardProps) {
+  //const latest
+  const latestAnswer = answersList[answersList.length - 1]
   return (
     <div className="w-full overflow-y-hidden overflow-x-scroll md:overflow-x-hidden sm:flex sm:flex-col sm:items-center py-4">
       <motion.div
@@ -81,6 +83,17 @@ export function AnswersBoard({
           </motion.div>
         )
       })}
+      <AnimatePresence>
+        <motion.span
+          key={latestAnswer.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="my-4 text-zinc-400"
+        >
+          {latestAnswer.first_name} {latestAnswer.last_name}
+        </motion.span>
+      </AnimatePresence>
     </div>
   )
 }

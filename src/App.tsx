@@ -60,8 +60,13 @@ function App() {
           </motion.div>
         )}
       </main>
-      <footer className="flex items-center justify-center mt-auto text-zinc-600 bg-zinc-900">
-        made by <a href="http://www.rrascon.online">rrascon</a>
+      <footer className="flex flex-row items-center justify-center py-4 border-t border-zinc-700 text-sm text-zinc-500 bg-black">
+        <span>
+          {'by a NFL fan '}
+          <a className="underline" href="http://www.rrascon.online">
+            {'rrascon'}
+          </a>
+        </span>
       </footer>
     </>
   )
