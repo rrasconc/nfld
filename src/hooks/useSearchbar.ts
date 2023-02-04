@@ -14,9 +14,9 @@ export function useSearchbar(searchValue: string) {
   const filteredList = useMemo(
     () =>
       players.list.filter((player) =>
-        `${player.first_name} ${player.last_name}`.includes(
-          searchValue.toUpperCase()
-        )
+        `${player.first_name} ${player.last_name}`
+          .toUpperCase()
+          .includes(searchValue.toUpperCase())
       ),
     [searchValue, players.list]
   )
