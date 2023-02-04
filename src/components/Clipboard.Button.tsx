@@ -36,7 +36,7 @@ export function ClipboardButton({
   const handlePress = () => {
     setIsCopied(true)
     const resultEmojis = getResultsEmojis()
-    const message = `NFLdle #${winnerPlayer?.daily_number} 🏈\n\n${resultEmojis}\n\nwww.nfldle.com`
+    const message = `NFLdle #${winnerPlayer?.daily_number} 🏈\n\n${resultEmojis}\n\nwww.nfldle.xyz`
     navigator.clipboard.writeText(message)
   }
 
