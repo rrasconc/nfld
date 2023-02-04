@@ -63,7 +63,7 @@ export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
       </motion.form>
 
       {isListVisible && searchValue && !disabled && (
-        <div className="flex max-h-72 flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800">
+        <div className="flex max-h-72 overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800">
           {isLoading && <Loader />}
 
           {!isLoading && list.length === 0 && (
