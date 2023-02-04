@@ -21,6 +21,8 @@ export interface AnswerCardProps {
   value: string
   isCorrect: boolean
   delay: number
+  flagUp?: boolean
+  flagDown?: boolean
 }
 
 export interface AnswersBoardProps {

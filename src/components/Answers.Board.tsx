@@ -1,8 +1,16 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
 import { CATEGORIES } from '../constants/game'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
-export function AnswerCard({ value, isCorrect, delay }: AnswerCardProps) {
+export function AnswerCard({
+  value,
+  isCorrect,
+  delay,
+  flagUp,
+  flagDown
+}: AnswerCardProps) {
   return (
     <motion.span
       initial={{ scale: 0, opacity: 0 }}
@@ -12,7 +20,19 @@ export function AnswerCard({ value, isCorrect, delay }: AnswerCardProps) {
         isCorrect ? 'bg-green-700' : 'bg-red-700'
       }  h-16 w-16 p-1 rounded-sm border items-center justify-center border-zinc-400`}
     >
-      {value}
+      <span className="z-20">{value}</span>
+      {flagUp && (
+        <FontAwesomeIcon
+          className="absolute text-6xl text-red-900 z-10"
+          icon={faArrowUp}
+        />
+      )}
+      {flagDown && (
+        <FontAwesomeIcon
+          className="absolute text-6xl text-red-900 z-10"
+          icon={faArrowDown}
+        />
+      )}
     </motion.span>
   )
 }
@@ -80,6 +100,8 @@ export function AnswersBoard({
               delay={2.5}
               isCorrect={player.drafted === winnerPlayer.drafted}
               value={player.drafted.toString()}
+              flagUp={player.drafted < winnerPlayer.drafted}
+              flagDown={player.drafted > winnerPlayer.drafted}
             />
           </motion.div>
         )
