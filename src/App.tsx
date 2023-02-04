@@ -47,25 +47,39 @@ function App() {
           />
         )}
 
-        {latestAnswer && (
+        {latestAnswer && answers.length < CATEGORIES.length && !isWinner && (
           <AnimatePresence>
-            <motion.span
+            <motion.h1
               key={latestAnswer.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="my-4 text-zinc-400"
+              className="my-4 text-lg text-zinc-200"
             >
-              {latestAnswer.first_name} {latestAnswer.last_name}
-            </motion.span>
+              {`${latestAnswer.first_name} ${latestAnswer.last_name}`}
+            </motion.h1>
           </AnimatePresence>
+        )}
+
+        {(answers.length === CATEGORIES.length || isWinner) && (
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.5 }}
+            className="my-4 text-lg text-zinc-500"
+          >
+            Daily player:{' '}
+            <span className="text-lg text-zinc-200">
+              {`${dailyPlayer.data?.first_name} ${dailyPlayer.data?.last_name}`}
+            </span>
+          </motion.h1>
         )}
 
         {(isWinner || answers.length === CATEGORIES.length) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 2.5 }}
             className="flex flex-col items-center"
           >
             <ClipboardButton
