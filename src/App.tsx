@@ -47,17 +47,19 @@ function App() {
           />
         )}
 
-        <AnimatePresence>
-          <motion.span
-            key={latestAnswer.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="my-4 text-zinc-400"
-          >
-            {latestAnswer.first_name} {latestAnswer.last_name}
-          </motion.span>
-        </AnimatePresence>
+        {latestAnswer && (
+          <AnimatePresence>
+            <motion.span
+              key={latestAnswer.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="my-4 text-zinc-400"
+            >
+              {latestAnswer.first_name} {latestAnswer.last_name}
+            </motion.span>
+          </AnimatePresence>
+        )}
 
         {(isWinner || answers.length === CATEGORIES.length) && (
           <motion.div
