@@ -67,46 +67,39 @@ export function useGame(dailyPlayer: {
   }
 
   const retrieveGameStatus = async () => {
-    const gameStatus = getGameStatus()
-    if (gameStatus) {
-      setAnswers([...gameStatus.answersList])
-      setIsWinner(gameStatus.isWinner)
-    }
-
-    setIsLoadingGameStatus(false)
-  }
-
-  const checkForReset = async () => {
-    setIsLoadingGameStatus(true)
-
     const dailyDate = moment
       .utc(dailyPlayer.data?.daily_date)
       .set('hours', RESET_HOUR * 2)
       .set('minutes', 0)
       .set('seconds', 0)
+    //.add(1, 'day') //debug only
 
-    const gameStatus = await getGameStatus()
+    let gameStatus = await getGameStatus()
 
     if (gameStatus === null) {
+      setIsLoadingGameStatus(false)
       return
     }
 
     if (gameStatus.date === undefined) {
+      gameStatus = null
       resetGameStatus()
     }
 
     const hoursDiff = dailyDate.diff(moment.utc(gameStatus.date), 'hours')
 
     if (hoursDiff >= 23) {
+      gameStatus = null
       resetGameStatus()
+    }
+
+    if (gameStatus != null) {
+      setAnswers([...gameStatus.answersList])
+      setIsWinner(gameStatus.isWinner)
     }
 
     setIsLoadingGameStatus(false)
   }
-
-  useEffect(() => {
-    checkForReset()
-  }, [])
 
   useEffect(() => {
     retrieveGameStatus()
