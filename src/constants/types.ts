@@ -20,6 +20,7 @@ export interface DailyPlayer extends Player {
 export interface AnswerCardProps {
   value: string
   isCorrect: boolean
+  isSimilarPosition?: boolean
   delay: number
   flagUp?: boolean
   flagDown?: boolean
