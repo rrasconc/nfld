@@ -79,7 +79,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
+            transition={{ delay: 1 }}
             className="flex flex-col items-center"
           >
             <ClipboardButton
