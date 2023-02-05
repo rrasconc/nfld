@@ -76,12 +76,9 @@ export function useGame(dailyPlayer: {
     setIsLoadingGameStatus(false)
   }
 
-  const resetGame = async () => {
-    resetGameStatus()
-    window.location.reload()
-  }
-
   const checkForReset = async () => {
+    setIsLoadingGameStatus(true)
+
     const dailyDate = moment
       .utc(dailyPlayer.data?.daily_date)
       .set('hours', RESET_HOUR * 2)
@@ -95,14 +92,16 @@ export function useGame(dailyPlayer: {
     }
 
     if (gameStatus.date === undefined) {
-      resetGame()
+      resetGameStatus()
     }
 
     const hoursDiff = dailyDate.diff(moment.utc(gameStatus.date), 'hours')
 
     if (hoursDiff >= 23) {
-      resetGame()
+      resetGameStatus()
     }
+
+    setIsLoadingGameStatus(false)
   }
 
   useEffect(() => {
