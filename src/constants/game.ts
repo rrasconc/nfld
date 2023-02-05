@@ -11,6 +11,6 @@ export const CATEGORIES = [
 
 export const SIMILAR_POSITIONS = {
   receivers: ['WR', 'TE'],
-  linemans: ['T', 'G', 'C', 'DT', 'DE'],
+  linemans: ['T', 'G', 'C', 'DT', 'DE', 'TE'],
   passDefenders: ['CB', 'S']
 }
