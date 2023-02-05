@@ -76,6 +76,11 @@ export function useGame(dailyPlayer: {
     setIsLoadingGameStatus(false)
   }
 
+  const resetGame = async () => {
+    resetGameStatus()
+    window.location.reload()
+  }
+
   const checkForReset = async () => {
     const dailyDate = moment
       .utc(dailyPlayer.data?.daily_date)
@@ -90,13 +95,13 @@ export function useGame(dailyPlayer: {
     }
 
     if (gameStatus.date === undefined) {
-      resetGameStatus()
+      resetGame()
     }
 
     const hoursDiff = dailyDate.diff(moment.utc(gameStatus.date), 'hours')
 
     if (hoursDiff >= 23) {
-      resetGameStatus()
+      resetGame()
     }
   }
 
