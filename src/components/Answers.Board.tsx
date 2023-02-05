@@ -16,7 +16,7 @@ export function AnswerCard({
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: delay }}
-      className={`flex ${
+      className={`flex relative ${
         isCorrect ? 'bg-green-700' : 'bg-red-700'
       }  h-16 w-16 p-1 rounded-sm border items-center justify-center border-zinc-400`}
     >
