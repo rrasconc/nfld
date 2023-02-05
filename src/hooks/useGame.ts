@@ -28,7 +28,12 @@ export function useGame(dailyPlayer: {
 
     let currentGameStatus = {
       isWinner: false,
-      answersList: [...answers, player]
+      answersList: [...answers, player],
+      date: moment
+        .utc()
+        .set('hours', RESET_HOUR * 2)
+        .set('minutes', 0)
+        .set('seconds', 0)
     }
 
     setAnswers([...answers, player])
@@ -71,16 +76,26 @@ export function useGame(dailyPlayer: {
     setIsLoadingGameStatus(false)
   }
 
-  const checkForReset = () => {
-    const dailyDate = moment(dailyPlayer.data?.daily_date).set(
-      'hours',
-      RESET_HOUR
-    )
-    // .subtract(1, 'day') //for debug only
+  const checkForReset = async () => {
+    const dailyDate = moment
+      .utc(dailyPlayer.data?.daily_date)
+      .set('hours', RESET_HOUR * 2)
+      .set('minutes', 0)
+      .set('seconds', 0)
 
-    const hoursDiff = moment().diff(dailyDate, 'hours')
+    const gameStatus = await getGameStatus()
 
-    if (hoursDiff >= 24) {
+    if (gameStatus === null) {
+      return
+    }
+
+    if (gameStatus.date === undefined) {
+      resetGameStatus()
+    }
+
+    const hoursDiff = dailyDate.diff(moment.utc(gameStatus.date), 'hours')
+
+    if (hoursDiff >= 23) {
       resetGameStatus()
     }
   }
