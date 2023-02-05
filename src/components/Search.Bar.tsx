@@ -86,7 +86,7 @@ export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
                     !isFirst && 'border-t border-zinc-600 pt-4'
                   }`}
                 >
-                  {player.first_name} {player.last_name}
+                  {player.first_name} {player.last_name} ({player.team})
                 </button>
               )
             })}
