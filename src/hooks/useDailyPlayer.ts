@@ -4,10 +4,9 @@ import { DailyPlayer } from '../constants/types'
 
 export function useDailyPlayer() {
   const [data, setData] = useState<DailyPlayer | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchDailyPlayer = async () => {
-    setIsLoading(true)
     try {
       const res = await backend.get('players/random/')
       setData({ ...res.data })

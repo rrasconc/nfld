@@ -7,7 +7,7 @@ import {
   storeGameStatus
 } from '../constants/localStorage'
 import { useAnimationControls } from 'framer-motion'
-import { CATEGORIES, RESET_HOUR } from '../constants/game'
+import { CATEGORIES } from '../constants/game'
 
 export function useGame(dailyPlayer: {
   data: DailyPlayer | null
@@ -29,11 +29,7 @@ export function useGame(dailyPlayer: {
     let currentGameStatus = {
       isWinner: false,
       answersList: [...answers, player],
-      date: moment
-        .utc()
-        .set('hours', RESET_HOUR * 2)
-        .set('minutes', 0)
-        .set('seconds', 0)
+      date: moment.utc().set('hours', 0).set('minutes', 0).set('seconds', 0)
     }
 
     setAnswers([...answers, player])
@@ -69,10 +65,9 @@ export function useGame(dailyPlayer: {
   const retrieveGameStatus = async () => {
     const dailyDate = moment
       .utc(dailyPlayer.data?.daily_date)
-      .set('hours', RESET_HOUR * 2)
+      .set('hours', 0)
       .set('minutes', 0)
       .set('seconds', 0)
-    //.add(1, 'day') //debug only
 
     let gameStatus = await getGameStatus()
 
@@ -103,7 +98,7 @@ export function useGame(dailyPlayer: {
 
   useEffect(() => {
     retrieveGameStatus()
-  }, [])
+  }, [dailyPlayer.data])
 
   return {
     isWinner,
