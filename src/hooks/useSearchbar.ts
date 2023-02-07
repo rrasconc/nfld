@@ -13,11 +13,16 @@ export function useSearchbar(searchValue: string) {
 
   const filteredList = useMemo(
     () =>
-      players.list.filter((player) =>
-        `${player.first_name} ${player.last_name}`
-          .toUpperCase()
-          .includes(searchValue.toUpperCase())
-      ),
+      players.list.filter((player) => {
+        const upperSearchValue = searchValue.toUpperCase()
+        const playerName =
+          `${player.first_name} ${player.last_name}`.toUpperCase()
+
+        return (
+          playerName.includes(upperSearchValue) ||
+          player.team.toUpperCase().includes(upperSearchValue)
+        )
+      }),
     [searchValue, players.list]
   )
 
