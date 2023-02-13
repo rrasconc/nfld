@@ -37,7 +37,11 @@ function App() {
           src="./logo.png"
           className="h-32 w-32 my-4"
         />
-        <SearchBar onPlayerSubmit={handlePlayerSubmit} disabled={isWinner} />
+        <SearchBar
+          placeholder="Search a player"
+          onPlayerSubmit={handlePlayerSubmit}
+          disabled={isWinner}
+        />
 
         {dailyPlayer.data && answers.length > 0 && (
           <AnswersBoard

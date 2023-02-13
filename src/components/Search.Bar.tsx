@@ -6,10 +6,14 @@ import { useSearchbar } from '../hooks/useSearchbar'
 import { Loader } from './Loader.Spinner'
 import { motion } from 'framer-motion'
 
-export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
+export function SearchBar({
+  onPlayerSubmit,
+  disabled,
+  placeholder,
+  emptyListLabel
+}: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('')
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
-  const [isListVisible, setIsListVisible] = useState<boolean>(false)
 
   const searchbar = useSearchbar(searchValue)
   const { list, isLoading } = searchbar
@@ -41,16 +45,9 @@ export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
           icon={faMagnifyingGlass}
         />
         <input
-          onFocus={() => setIsListVisible(true)}
-          onBlur={() => {
-            if (searchValue) {
-              return
-            }
-            setIsListVisible(false)
-          }}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Search a player"
+          placeholder={placeholder}
           className="outline-none bg-zinc-900 rounded-md py-4 px-4 w-full"
           type="text"
         />
@@ -62,12 +59,14 @@ export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
         </button>
       </motion.form>
 
-      {isListVisible && searchValue && !disabled && (
+      {searchValue && !disabled && (
         <div className="flex max-h-72 overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800">
           {isLoading && <Loader />}
 
           {!isLoading && list.length === 0 && (
-            <span className="p-4 text-zinc-600 text-center">No results</span>
+            <span className="p-4 text-zinc-600 text-center">
+              {emptyListLabel ? emptyListLabel : 'No results'}
+            </span>
           )}
 
           {!isLoading &&
@@ -79,7 +78,6 @@ export function SearchBar({ onPlayerSubmit, disabled }: SearchBarProps) {
                   onClick={() => {
                     setSearchValue(`${player.first_name} ${player.last_name}`)
                     setSelectedPlayer(player)
-                    setIsListVisible(false)
                   }}
                   key={index}
                   className={`p-4 hover:bg-zinc-900 text-left ${
