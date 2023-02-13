@@ -34,7 +34,7 @@ export interface AnswersBoardProps {
 
 export interface SearchBarProps {
   onPlayerSubmit: (player: Player) => void
-  disabled: boolean
+  disabled?: boolean
 }
 
 export interface GameStatus {
