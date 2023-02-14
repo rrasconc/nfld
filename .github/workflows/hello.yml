@@ -1,0 +1,11 @@
+name: Say hello
+on:
+  push:
+    branches:
+      - main
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+    setps:
+      - name: Echo the message
+        run: echo "Hello world"
