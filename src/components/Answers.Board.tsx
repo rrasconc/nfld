@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { AnswerCardProps, AnswersBoardProps } from '../constants/types'
 import { CATEGORIES, SIMILAR_POSITIONS } from '../constants/game'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faArrowUp, faL } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 export function AnswerCard({
   value,
