@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { SearchBar } from '../components/Search.Bar'
-import { mockPlayers } from '../mocks/handlers'
+import { SearchBar } from '../Search.Bar'
+import { mockPlayers } from '../../mocks/handlers'
 import userEvent from '@testing-library/user-event'
 
 describe('SearchBar', () => {
