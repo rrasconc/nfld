@@ -25,7 +25,9 @@ jobs:
 
       - name: Create env file
         run: |
-          echo "${{ vars.VITE_API_BASE_URL }}" > .env
+          touch .env
+          echo VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }} >> .env
+          cat .env
 
       - name: 🔨 Build
         run: npm run build
