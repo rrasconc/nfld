@@ -28,6 +28,20 @@ export const mockPlayers = [
   }
 ]
 
+export const mockDaily = {
+  id: 1,
+  first_name: 'Denzel',
+  last_name: 'Ward',
+  conference: 'AFC',
+  division: 'NORTH',
+  position: 'CB',
+  position_type: 'OFF',
+  team: 'CLE',
+  drafted: 2018,
+  daily_date: '2022-01-22',
+  daily_number: 3
+}
+
 export const handlers = [
   // Handles a POST /login request
   rest.get('http://127.0.0.1:8000/api/players/', (req, res, ctx) => {
