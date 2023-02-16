@@ -30,7 +30,7 @@ export function SearchBar({
   }
 
   return (
-    <>
+    <div className="w-full relative">
       <motion.form
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -60,7 +60,7 @@ export function SearchBar({
       </motion.form>
 
       {searchValue && !disabled && (
-        <div className="flex max-h-72 overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800">
+        <div className="flex max-h-72 absolute overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800 z-30">
           {isLoading && <Loader />}
 
           {!isLoading && list.length === 0 && (
@@ -90,6 +90,6 @@ export function SearchBar({
             })}
         </div>
       )}
-    </>
+    </div>
   )
 }
