@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+env:
+  # Setting an environment variable with the value of a configuration variable
+  api_url_var: ${{ vars.API_BASE_URL }}
 
 jobs:
   deploy:
@@ -26,7 +29,7 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo VITE_API_BASE_URL=${{ vars.API_BASE_URL }} >> .env
+          echo "VITE_API_BASE_URL=$api_url_var" >> .env
           cat .env
 
       - name: 🔨 Build
