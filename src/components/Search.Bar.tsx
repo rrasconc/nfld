@@ -59,7 +59,7 @@ export function SearchBar({
         </button>
       </motion.form>
 
-      {searchValue && !disabled && (
+      {searchValue && !selectedPlayer && !disabled && (
         <div className="flex max-h-72 absolute overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800 z-30">
           {isLoading && <Loader />}
 

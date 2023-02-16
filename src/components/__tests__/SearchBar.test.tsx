@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { SearchBar } from '../Search.Bar'
 import { mockPlayers } from '../../mocks/handlers'
 import userEvent from '@testing-library/user-event'
@@ -18,11 +18,11 @@ describe('SearchBar', () => {
     )
   })
 
-  it("Shouldn't display list if no search value", () => {
+  it("Shouldn't display dropdown if no search value", () => {
     expect(screen.queryByText(emptyListLabel)).toBeNull()
   })
 
-  it("Shouldn't display list if search value entered", async () => {
+  it('Should display dropdown if search value entered', async () => {
     const input = screen.getByPlaceholderText(placeholder)
     await user.type(input, 'some random player')
 
@@ -54,5 +54,23 @@ describe('SearchBar', () => {
     })
     await user.click(playerButton)
     expect(screen.getByDisplayValue(`${player.first_name} ${player.last_name}`))
+  })
+
+  it('Should hide dropdown on player click', async () => {
+    const player = mockPlayers[0]
+    const playerButtonName = `${player.first_name} ${player.last_name} (${player.team})`
+
+    const input = screen.getByPlaceholderText(placeholder)
+    await user.type(input, player.first_name)
+
+    const playerButton = screen.getByRole('button', {
+      name: playerButtonName
+    })
+    await user.click(playerButton)
+    expect(
+      screen.queryByRole('button', {
+        name: playerButtonName
+      })
+    ).toBeNull()
   })
 })
