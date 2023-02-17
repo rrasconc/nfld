@@ -38,7 +38,7 @@ export function SearchBar({
           delay: 0.2
         }}
         onSubmit={handleSubmit}
-        className="flex flex-row rounded-lg w-full my-4 pl-4 max-w-5xl bg-zinc-900 border focus-within:border-zinc-400 border-zinc-600 items-center"
+        className="flex flex-row mx-auto rounded-lg w-full my-4 pl-4 max-w-5xl bg-zinc-900 border focus-within:border-zinc-400 border-zinc-600 items-center"
       >
         <FontAwesomeIcon
           className="text-zinc-600 text-lg"
@@ -60,7 +60,7 @@ export function SearchBar({
       </motion.form>
 
       {searchValue && !selectedPlayer && !disabled && (
-        <div className="flex max-h-72 absolute overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800 z-30">
+        <div className="flex left-0 right-0 mx-auto max-h-72 absolute overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800 z-30">
           {isLoading && <Loader />}
 
           {!isLoading && list.length === 0 && (
