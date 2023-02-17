@@ -31,7 +31,7 @@ export function useGame(dailyPlayer: {
       answersList: [...answers, player],
       date: moment
         .utc()
-        .set('hours', RESET_HOUR * 2)
+        .set('hours', RESET_HOUR)
         .set('minutes', 0)
         .set('seconds', 0)
     }
@@ -69,7 +69,7 @@ export function useGame(dailyPlayer: {
   const retrieveGameStatus = async () => {
     const dailyDate = moment
       .utc(dailyPlayer.data?.daily_date)
-      .set('hours', RESET_HOUR * 2)
+      .set('hours', RESET_HOUR)
       .set('minutes', 0)
       .set('seconds', 0)
 
