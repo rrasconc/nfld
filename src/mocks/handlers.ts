@@ -1,7 +1,8 @@
 import { rest } from 'msw'
+import { DailyPlayer, Player } from '../constants/types'
 
 //mock data
-export const mockPlayers = [
+export const mockPlayers: Player[] = [
   {
     conference: 'AFC',
     division: 'WEST',
@@ -9,7 +10,6 @@ export const mockPlayers = [
     first_name: 'Patrick',
     id: 61,
     last_name: 'Mahomes',
-    number: 15,
     position: 'QB',
     position_type: 'OFF',
     team: 'KC'
@@ -21,14 +21,24 @@ export const mockPlayers = [
     first_name: 'Jalen',
     id: 22,
     last_name: 'Hurts',
-    number: 1,
     position: 'QB',
     position_type: 'OFF',
     team: 'PHI'
+  },
+  {
+    id: 1,
+    first_name: 'Denzel',
+    last_name: 'Ward',
+    conference: 'AFC',
+    division: 'NORTH',
+    position: 'CB',
+    position_type: 'OFF',
+    team: 'CLE',
+    drafted: 2018
   }
 ]
 
-export const mockDaily = {
+export const mockDaily: DailyPlayer = {
   id: 1,
   first_name: 'Denzel',
   last_name: 'Ward',
@@ -43,12 +53,10 @@ export const mockDaily = {
 }
 
 export const handlers = [
-  // Handles a POST /login request
   rest.get('http://127.0.0.1:8000/api/players/', (req, res, ctx) => {
-    return res(
-      // Respond with a 200 status code
-      ctx.status(200),
-      ctx.json(mockPlayers)
-    )
+    return res(ctx.status(200), ctx.json(mockPlayers))
+  }),
+  rest.get('http://127.0.0.1:8000/api/players/random/', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(mockDaily))
   })
 ]

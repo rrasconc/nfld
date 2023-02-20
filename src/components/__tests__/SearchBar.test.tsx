@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { SearchBar } from '../Search.Bar'
 import { mockPlayers } from '../../mocks/handlers'
 import userEvent from '@testing-library/user-event'
@@ -17,6 +17,8 @@ describe('SearchBar', () => {
       />
     )
   })
+
+  afterEach(cleanup)
 
   it("Shouldn't display dropdown if no search value", () => {
     expect(screen.queryByText(emptyListLabel)).toBeNull()

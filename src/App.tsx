@@ -98,7 +98,7 @@ function App() {
         <span>
           {'by a NFL fan '}
           <a className="underline" href="http://www.rrascon.online">
-            {'rrascon'}
+            {'@rrascon'}
           </a>
         </span>
       </footer>

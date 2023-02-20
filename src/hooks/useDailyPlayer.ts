@@ -14,9 +14,7 @@ export function useDailyPlayer() {
       console.error(error)
     }
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 500)
+    setIsLoading(false)
   }
   useEffect(() => {
     fetchDailyPlayer()
