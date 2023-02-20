@@ -30,13 +30,17 @@ function App() {
 
   return (
     <>
-      <main className="flex flex-col bg-[url('/bg.png')] bg-cover min-h-screen text-zinc-200 p-4 items-center">
-        <motion.img
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          src="./logo.png"
-          className="h-32 w-32 my-4"
-        />
+      <main className="flex flex-col bg-[url('/bg.webp')] bg-cover min-h-screen text-zinc-200 p-4 items-center">
+        <picture>
+          <source srcSet="./logo.webp" type="image/webp" />
+          <motion.img
+            alt="NFLdle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            src="./logo.png"
+            className="h-32 w-32 my-4"
+          />
+        </picture>
         <SearchBar
           placeholder="Search a player"
           onPlayerSubmit={handlePlayerSubmit}
