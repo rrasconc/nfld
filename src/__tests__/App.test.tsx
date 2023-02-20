@@ -7,11 +7,13 @@ import {
   waitForElementToBeRemoved
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { CATEGORIES } from '../constants/game'
 
 describe('App', () => {
   const user = userEvent.setup()
 
   beforeEach(async () => {
+    window.localStorage.clear()
     render(<App />)
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i))
   })
@@ -56,9 +58,11 @@ describe('App', () => {
     const input = await screen.findByPlaceholderText(/search a player/i)
     const guessButton = screen.getByRole('button', { name: /guess/i })
 
-    await user.type(input, 'Jalen')
-    await user.click(screen.getByRole('button', { name: /jalen/i }))
-    await user.click(guessButton)
+    for await (const i of CATEGORIES) {
+      await user.type(input, 'Jalen')
+      await user.click(screen.getByRole('button', { name: /jalen/i }))
+      await user.click(guessButton)
+    }
 
     await waitFor(
       () => {
