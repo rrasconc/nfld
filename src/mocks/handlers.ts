@@ -52,11 +52,13 @@ export const mockDaily: DailyPlayer = {
   daily_number: 3
 }
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL
+
 export const handlers = [
-  rest.get('http://127.0.0.1:8000/api/players/', (req, res, ctx) => {
+  rest.get(`${apiUrl}players/`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(mockPlayers))
   }),
-  rest.get('http://127.0.0.1:8000/api/players/random/', (req, res, ctx) => {
+  rest.get(`${apiUrl}players/random/`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(mockDaily))
   })
 ]
