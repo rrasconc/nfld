@@ -14,6 +14,7 @@ export function SearchBar({
 }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('')
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
+  const [isOnFocus, setIsOnFocus] = useState<boolean>(false)
 
   const searchbar = useSearchbar(searchValue)
   const { list, isLoading } = searchbar
@@ -50,18 +51,24 @@ export function SearchBar({
           placeholder={placeholder}
           className="outline-none bg-zinc-900 rounded-md py-4 px-4 w-full"
           type="text"
+          onFocus={() => setIsOnFocus(true)}
+          onBlur={() => setIsOnFocus(false)}
         />
         <button
           type="submit"
-          className="bg-sky-800 hover:border-zinc-400 hover:border-l focus:border-zinc-400 focus:border-l focus:bg-sky-800 px-6 py-4 rounded-r-lg h-full"
+          className="bg-sky-800 hover:bg-sky-900 focus:border-zinc-400 focus:border-l focus:bg-sky-800 px-6 py-4 rounded-r-lg h-full"
         >
           Guess
         </button>
       </motion.form>
 
-      {searchValue && !selectedPlayer && !disabled && (
+      {isOnFocus && !disabled && (
         <div className="flex left-0 right-0 mx-auto max-h-72 absolute overflow-y-scroll flex-col w-full max-w-5xl border rounded-md border-zinc-600 bg-zinc-800 z-30">
-          {isLoading && <Loader />}
+          {isLoading && (
+            <div className="flex flex-1 justify-center p-4">
+              <Loader />
+            </div>
+          )}
 
           {!isLoading && list.length === 0 && (
             <span className="p-4 text-zinc-600 text-center">
@@ -75,8 +82,9 @@ export function SearchBar({
               return (
                 <button
                   type="button"
-                  onClick={() => {
+                  onMouseDown={() => {
                     setSearchValue(`${player.first_name} ${player.last_name}`)
+                    setIsOnFocus(false)
                     setSelectedPlayer(player)
                   }}
                   key={index}
